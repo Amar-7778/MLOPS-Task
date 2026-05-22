@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Learning Outcome Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero-card">
+      <div class="hero-copy">
+        <p class="eyebrow">Day 7 • Flask prediction app</p>
+        <h1>Predict the student learning outcome </h1>
+        <p class="hero-text">
+          This app loads the pickle model from <strong>model_pickle.pkl</strong> and uses the same training features from the notebook to predict the final learning outcome.
+        </p>
+        <div class="hero-badges">
+          <span>Model: {{ model_name }}</span>
+          <span>Features: 23</span>
+          <span>Flask + HTML + CSS + JS</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-label">Prediction API</span>
+          <strong>/predict</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Input mode</span>
+          <strong>Form + JSON</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Output</span>
+          <strong>Label + probabilities</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <form id="prediction-form" class="form-card">
+        {% for section in field_sections %}
+        <article class="input-section">
+          <div class="section-heading">
+            <h2>{{ section.title }}</h2>
+            <p>{{ section.description }}</p>
+          </div>
+
+          <div class="field-grid">
+            {% for field in section.fields %}
+            <label class="field-shell" for="{{ field.name }}">
+              <span>{{ field.label }}</span>
+              {% if field.kind == 'select' %}
+              <select name="{{ field.name }}" id="{{ field.name }}" required>
+                {% for option in category_levels[field.name] %}
+                <option value="{{ option }}" {% if option == defaults[field.name] %}selected{% endif %}>{{ option }}</option>
+                {% endfor %}
+              </select>
+              {% elif field.kind == 'binary' %}
+              <select name="{{ field.name }}" id="{{ field.name }}" required>
+                <option value="0" {% if defaults[field.name] == 0 %}selected{% endif %}>No</option>
+                <option value="1" {% if defaults[field.name] == 1 %}selected{% endif %}>Yes</option>
+              </select>
+              {% else %}
+              <input
+                type="number"
+                name="{{ field.name }}"
+                id="{{ field.name }}"
+                value="{{ defaults[field.name] }}"
+                step="{{ field.step }}"
+                required
+              />
+              {% endif %}
+            </label>
+            {% endfor %}
+          </div>
+        </article>
+        {% endfor %}
+
+        <div class="actions-row">
+          <button type="submit" class="primary-btn">Predict outcome</button>
+          <button type="reset" class="secondary-btn">Reset form</button>
+        </div>
+      </form>
+
+      <aside class="result-card">
+        <div class="result-header">
+          <p class="eyebrow">Prediction result</p>
+          <h2 id="prediction-label">Waiting for input</h2>
+          <p id="prediction-note">Submit the form to see the predicted learning outcome.</p>
+        </div>
+
+        <div class="probability-panel">
+          <h3>Class probabilities</h3>
+          <div id="probability-list" class="probability-list"></div>
+        </div>
+
+        <div class="meta-strip">
+          <span>Saved pickle</span>
+          <span>Sklearn model</span>
+          <span>Automatic one-hot encoding</span>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
