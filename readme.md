@@ -14,3 +14,8 @@ The Accuracy score for my own problem statemtent Dataset(ML models):
 8: Kmeans(inertia) = 114770.44133975237
 9: Naive Bayes = 0.5555555555555556
 10:KNN = 0.5833333333333334
+
+I Perfromed the random forest model which give accuracy of 89% , and they perform on the selected features.The image shows the ui of the of model save and perfroming and done using the flask api for the backend.
+<img width="1888" height="843" alt="Screenshot 2026-05-22 151132" src="https://github.com/user-attachments/assets/29fe32f4-a002-4a83-b582-c8e66c323990" />
+
+<img width="1897" height="905" alt="image" src="https://github.com/user-attachments/assets/0cd9b878-6afc-4f95-87db-28948eea44a9" />
