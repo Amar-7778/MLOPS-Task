@@ -1,0 +1,46 @@
+{
+  "version": "6.3.0",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "CHILDREN",
+      "points": [
+        [
+          553.4453781512605,
+          6.218487394957965
+        ],
+        [
+          849.2436974789915,
+          317.98319327731093
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "CHILDREN",
+      "points": [
+        [
+          870.2521008403361,
+          1.176470588235275
+        ],
+        [
+          1166.0504201680674,
+          287.7310924369748
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    }
+  ],
+  "imagePath": "118_frames544.jpg",
+  "imageData": null,
+  "imageHeight": 720,
+  "imageWidth": 1280
+}
