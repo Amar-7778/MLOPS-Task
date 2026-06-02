@@ -1,0 +1,13 @@
+services:
+  yolo-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+    volumes:
+      - ./runs:/app/runs
+      - ./uploads:/app/uploads
+    restart: unless-stopped
